@@ -31,11 +31,6 @@ in
       "vscode"
       "code"
     ];
-
-    # Allow specific insecure packages
-    permittedInsecurePackages = [
-      "dotnet-sdk-6.0.428"
-    ];
   };
 
 
@@ -77,15 +72,18 @@ in
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+
     ohMyZsh = {
-      enable = true; # Optionally enable Oh My Zsh
-      plugins = [ "git" "z" "history-substring-search" ]; # Example plugins
-      theme = "cloud"; # Set your preferred theme -> https://github.com/ohmyzsh/ohmyzsh/wiki/themes
+      enable = true;
+      plugins = [ "git" "z" "history-substring-search" ];
+      theme = "cloud"; # Change this to your preferred theme
     };
+
     shellAliases = {
       ll = "ls -l";
       update = "sudo nixos-rebuild switch";
     };
+
     history.size = 10000;
   };
 
