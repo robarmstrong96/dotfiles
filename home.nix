@@ -8,7 +8,6 @@ let
         "dotnet-sdk-6.0.428" 
         "dotnet-runtime-6.0.36"
       ];
-      #allowInsecure = true; # Alternative option if `permittedInsecurePackages` doesn’t work
     };
   };
   lib = pkgs.lib; # Import the `lib` library
@@ -33,7 +32,6 @@ in
     ];
   };
 
-
   # Install packages
   home.packages = with pkgs; [
     tmux
@@ -43,7 +41,23 @@ in
     bambu-studio
     spotify
     vscode-fhs
+    nixfmt
   ];
+
+  systemd.user.services.eddie-elevated = {
+    description = "Eddie Elevated Service";
+    requires = [ "network.target" ];
+    after = [ "network.target" ];
+    wantedBy = [ "default.target" ];
+
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "/usr/lib/eddie-ui/eddie-cli-elevated service";
+      Restart = "always";
+      RestartSec = "1s";
+      TimeoutStopSec = "5s";
+    };
+  };
 
   # Configure Git
   programs.git = {
@@ -66,14 +80,14 @@ in
     };
   };
 
-  # Configure ZSH
+  # Configure Zsh
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    ohMyZsh = {
+    oh-my-zsh = {
       enable = true;
       plugins = [ "git" "z" "history-substring-search" ];
       theme = "cloud"; # Change this to your preferred theme
@@ -87,16 +101,12 @@ in
     history.size = 10000;
   };
 
-  # Set Zsh as the default shell
-  home.shell = pkgs.zsh;
-
   # Home Manager manages itself
   programs.home-manager.enable = true;
 
   # Environment variables
   home.sessionVariables = {
-    # Uncomment and modify as needed
-    # EDITOR = "nvim";
+    EDITOR = "nvim";
   };
 
   # Manage dotfiles
