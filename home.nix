@@ -55,10 +55,20 @@ in
     };
     Service = {
       Type = "simple";
-      ExecStart = "/usr/lib/eddie-ui/eddie-cli-elevated service";
+      ExecStart = "/usr/lib/eddie-ui/eddie-cli-elevated elevation=sudo service";
       Restart = "always";
-      RestartSec = "1s";
+      RestartSec = "5s";
       TimeoutStopSec = "5s";
+
+      # Allow access to system-level operations
+      CapabilityBoundingSet = [
+        "CAP_NET_ADMIN"
+        "CAP_NET_RAW"
+      ];
+      AmbientCapabilities = [
+        "CAP_NET_ADMIN"
+        "CAP_NET_RAW"
+      ];
     };
   };
 
