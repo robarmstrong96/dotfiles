@@ -74,6 +74,28 @@
     # EDITOR = "emacs";
   };
 
+  
+  # Git config
+  programs.git = {
+    enable = true;
+    
+    settings = {
+      userName = "robarmstrong96";
+      userEmail = "kylearmstrong96@outlook.com";
+      core.editor = "nvim";
+      pull.rebase = true;
+      init.defaultBranch = "main";
+    };
+
+  # Git aliases
+  aliases = {
+    co = "checkout";
+    br = "branch";
+    ci = "commit";
+    st = "status";
+    lg = "log --oneline --graph --decorate --all";
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
