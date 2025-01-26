@@ -75,26 +75,26 @@
   };
 
   
-# Git config
-programs.git = {
-  enable = true;
+  # Git config
+  programs.git = {
+    enable = true;
 
-  extraConfig = {
-    user.name = "robarmstrong96";
-    user.email = "kylearmstrong96@outlook.com";
-    core.editor = "nvim";
-    pull.rebase = "true";
-    init.defaultBranch = "main";
-  };
+    extraConfig = {
+      user.name = "robarmstrong96";
+      user.email = "kylearmstrong96@outlook.com";
+      core.editor = "nvim";
+      pull.rebase = "true";
+      init.defaultBranch = "main";
+      };
 
-  aliases = {
-    co = "checkout";
-    br = "branch";
-    ci = "commit";
-    st = "status";
-    lg = "log --oneline --graph --decorate --all";
+    aliases = {
+      co = "checkout";
+      br = "branch";
+      ci = "commit";
+      st = "status";
+      lg = "log --oneline --graph --decorate --all";
+    };
   };
-};
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
