@@ -77,13 +77,20 @@ in
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-
+    ohMyZsh = {
+      enable = true; # Optionally enable Oh My Zsh
+      plugins = [ "git" "z" "history-substring-search" ]; # Example plugins
+      theme = "cloud"; # Set your preferred theme -> https://github.com/ohmyzsh/ohmyzsh/wiki/themes
+    };
     shellAliases = {
       ll = "ls -l";
       update = "sudo nixos-rebuild switch";
     };
     history.size = 10000;
   };
+
+  # Set Zsh as the default shell
+  home.shell = pkgs.zsh;
 
   # Home Manager manages itself
   programs.home-manager.enable = true;
