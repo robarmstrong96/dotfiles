@@ -87,13 +87,14 @@
       init.defaultBranch = "main";
     };
 
-  # Git aliases
-  aliases = {
-    co = "checkout";
-    br = "branch";
-    ci = "commit";
-    st = "status";
-    lg = "log --oneline --graph --decorate --all";
+    # Git aliases
+    aliases = {
+      co = "checkout";
+      br = "branch";
+      ci = "commit";
+      st = "status";
+      lg = "log --oneline --graph --decorate --all";
+    };
   };
 
   # Let Home Manager install and manage itself.
