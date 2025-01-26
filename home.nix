@@ -45,12 +45,15 @@ in
   ];
 
   systemd.user.services.eddie-elevated = {
-    description = "Eddie Elevated Service";
-    requires = [ "network.target" ];
-    after = [ "default.target" ];
-    wantedBy = [ "default.target" ];
-
-    serviceConfig = {
+    Unit = {
+      Description = "Eddie Elevated Service";
+      After = "default.target";  # Define dependencies in Unit
+      Requires = "default.target";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];  # Specify what enables this service
+    };
+    Service = {
       Type = "simple";
       ExecStart = "/usr/lib/eddie-ui/eddie-cli-elevated service";
       Restart = "always";
