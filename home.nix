@@ -1,5 +1,15 @@
 { config, pkgs, ... }:
 
+
+let
+  unstable = import <unstable> {};
+in
+{
+  home.packages = with pkgs; [
+    unstable.eddie
+  ];
+}
+
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
