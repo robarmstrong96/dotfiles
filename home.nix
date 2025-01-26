@@ -1,7 +1,17 @@
 { config, pkgs, ... }:
 
 let
-  unstable = import <unstable> {};
+  unstable = import <unstable> {
+    config = {
+      # Allow specific insecure packages
+      permittedInsecurePackages = [ 
+        "dotnet-sdk-6.0.428" 
+        "dotnet-runtime-6.0.36"
+      ];
+      #allowInsecure = true; # Alternative option if `permittedInsecurePackages` doesn’t work
+    };
+  };
+  lib = pkgs.lib; # Import the `lib` library
 in
 {
   # User information
@@ -11,12 +21,33 @@ in
   # Home Manager release compatibility
   home.stateVersion = "24.11";
 
+  # Global nixpkgs configuration
+  nixpkgs.config = {
+    # Allow specific unfree packages
+    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      "spotify"
+      "bambu-studio"
+      "vscode-fhs"
+      "vscode"
+      "code"
+    ];
+
+    # Allow specific insecure packages
+    permittedInsecurePackages = [
+      "dotnet-sdk-6.0.428"
+    ];
+  };
+
+
   # Install packages
   home.packages = with pkgs; [
     tmux
     neovim
     git
     unstable.eddie # Add Eddie from unstable channel
+    bambu-studio
+    spotify
+    vscode-fhs
   ];
 
   # Configure Git
