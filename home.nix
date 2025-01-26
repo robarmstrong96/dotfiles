@@ -47,7 +47,7 @@ in
   systemd.user.services.eddie-elevated = {
     description = "Eddie Elevated Service";
     requires = [ "network.target" ];
-    after = [ "network.target" ];
+    after = [ "default.target" ];
     wantedBy = [ "default.target" ];
 
     serviceConfig = {
