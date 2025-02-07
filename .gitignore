@@ -1,0 +1,5 @@
+# Un-ignore any .nix files anywhere in the repository
+!*.nix
+
+# Explicitly ignore the /result directory (and its contents)
+ result/*
