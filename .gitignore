@@ -2,4 +2,7 @@
 !*.nix
 
 # Explicitly ignore the /result directory (and its contents)
- result/*
+ ./result/*
+
+# Git folder?
+ .git
