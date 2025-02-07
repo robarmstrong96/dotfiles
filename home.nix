@@ -29,11 +29,13 @@ in
       "vscode-fhs"
       "vscode"
       "code"
+      "discord"
     ];
   };
 
   # Install packages
   home.packages = with pkgs; [
+    discord
     tmux
     neovim
     git
