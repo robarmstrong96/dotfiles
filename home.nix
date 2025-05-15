@@ -24,6 +24,10 @@ in
   nixpkgs.config = {
     # Allow specific unfree packages
     allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      "steam"
+      "steam-run"
+      "steam-original"
+      "steam-unwrapped"
       "spotify"
       "bambu-studio"
       "vscode-fhs"
@@ -35,6 +39,7 @@ in
 
   # Install packages
   home.packages = with pkgs; [
+    steam
     discord
     tmux
     neovim
@@ -43,7 +48,9 @@ in
     bambu-studio
     spotify
     vscode-fhs
-    nixfmt
+    nixfmt-rfc-style
+    chromium
+    tailscale
   ];
 
   systemd.user.services.eddie-elevated = {
